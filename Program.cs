@@ -23,6 +23,9 @@ namespace PopulationGrowth
             int yearsOfGrowth = CalculateGrowthInYears(startSize, endSize);
 
             Console.WriteLine("Years: " + yearsOfGrowth);
+
+            // Pause execution
+            Console.ReadLine();
         }
 
         static int GetInput(string message, int limit)
