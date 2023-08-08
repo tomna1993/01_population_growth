@@ -11,40 +11,43 @@ namespace PopulationGrowth
     {
         static void Main()
         {
-            int startSize = 0;
+            int startSize = GetInput("Start size: ", Constant.minPopulation);
+            
+            if (startSize == -1) { throw new InvalidProgramException("Wrong start size value!"); }
+
+
+            int endSize = GetInput("End size: ", startSize);
+
+            if (endSize == -1) { throw new InvalidProgramException("Wrong end size value!"); }
+
+
+        }
+
+        static int GetInput(string message, int limit)
+        {
+            int number = 0;
+            int tryes = 10;
 
             do
             {
-                Console.Write("Start size: ");
+                Console.Write(message);
 
                 try
                 {
-                    startSize = Convert.ToInt32(Console.ReadLine());
+                    number = Convert.ToInt32(Console.ReadLine());
                 }
                 catch (FormatException exception)
                 {
                     Console.WriteLine(exception.Message);
                 }
 
-            } while (startSize < Constant.minPopulation);
+                --tryes;
 
+            } while (number <= limit && tryes > 0);
 
-            int endSize = 0;
+            if (tryes == 0) { return -1; }
 
-            do
-            {
-                Console.Write("End size: ");
-
-                try
-                {
-                    endSize = Convert.ToInt32(Console.ReadLine());
-                }
-                catch (FormatException exception)
-                {
-                    Console.WriteLine(exception.Message);
-                }
-
-            } while (endSize >= startSize);
+            return number; 
         }
     }
 }
