@@ -20,7 +20,9 @@ namespace PopulationGrowth
 
             if (endSize == -1) { throw new InvalidProgramException("Wrong end size value!"); }
 
+            int yearsOfGrowth = CalculateGrowthInYears(startSize, endSize);
 
+            Console.WriteLine("Years: " + yearsOfGrowth);
         }
 
         static int GetInput(string message, int limit)
@@ -48,6 +50,21 @@ namespace PopulationGrowth
             if (tryes == 0) { return -1; }
 
             return number; 
+        }
+
+        static int CalculateGrowthInYears(int beginPopulation, int endPopulation)
+        {
+            int number = 0;
+
+            do
+            {
+                beginPopulation += (beginPopulation / 3) - (beginPopulation / 4);
+
+                ++number;
+
+            } while (endPopulation > beginPopulation);
+
+            return number;          
         }
     }
 }
